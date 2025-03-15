@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Dating App</a>
+        @if (accounService.currentUser()) {
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link">Matches</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link">Lists</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link">Messages</a>
+                </li>
+            </ul>
+        }
+
+        @if (accounService.currentUser()) {
+            <div class="dropdown" dropdown>
+                <a class="dropdown-toggle text-light text-decoration-none" style="cursor: pointer;" dropdownToggle>Welcome user</a>
+                <div class="dropdown-menu" *dropdownMenu>
+                    <div class="dropdown-item" style="cursor: pointer;">Edit profile</div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-item" style="cursor: pointer;" (click)="logout()">Logout</div>
+                </div>
+            </div>
+        }
+
+        @if (!accounService.currentUser()) {
+            <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off" class="form-inline mt-2 mt-md-0">
+                <input 
+                    name="username"
+                    [(ngModel)]="model.username" 
+                    class="form-control mr-sm-2" 
+                    style="display: inline; width: auto; margin-right: 10px;" 
+                    type="text" 
+                    placeholder="Username">
+                <input 
+                    name="password"
+                    [(ngModel)]="model.password"
+                    class="form-control mr-sm-2" 
+                    style="display: inline; width: auto; margin-right: 10px;" 
+                    type="password" 
+                    placeholder="Password">
+                <button class="btn btn-outline-success my-2 my-sm-0" style="display: inline;" type="submit">Log In</button>
+            </form>
+        }
+    </div>
+</nav>
